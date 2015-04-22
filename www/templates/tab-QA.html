@@ -1,0 +1,20 @@
+<ion-view view-title="问答">
+    <ion-content>
+        <div class="card question-list">
+            <div class="item item-text-wrap" ng-repeat="question in questions.rows">
+                <div class="text-align answers" ng-class="{'not-answers':question.answers == 0}">
+                    <div>{{question.answers}}</div>
+                    <div>回答</div>
+                </div>
+                <div class="text-align viewsWord">
+                    <div>{{question.viewsWord}}</div>
+                    <div>浏览</div>
+                </div>
+                <div class="title">
+                    <div class="user">{{question.user.name}} - {{question.createdDate}}</div>
+                    <a href="#tab/QA/{{question.id}}">{{question.title}}</a> 
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
