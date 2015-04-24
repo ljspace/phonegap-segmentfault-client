@@ -1,7 +1,9 @@
 <ion-view view-title="问答">
     <ion-content>
+        <ion-refresher pulling-text="加载中……" on-refresh="doRefresh()">
+        </ion-refresher>
         <div class="card question-list">
-            <div class="item item-text-wrap" ng-repeat="question in questions.rows">
+            <div class="item item-text-wrap" ng-repeat="question in questions">
                 <div class="text-align answers" ng-class="{'not-answers':question.answers == 0}">
                     <div>{{question.answers}}</div>
                     <div>回答</div>
@@ -12,9 +14,12 @@
                 </div>
                 <div class="title">
                     <div class="user">{{question.user.name}} - {{question.createdDate}}</div>
-                    <a href="#tab/QA/{{question.id}}">{{question.title}}</a> 
+                    <a href="#tab/QA/{{question.id}}">{{question.title}}</a>
                 </div>
             </div>
         </div>
+        <button class="button button-clear button-full" ng-click="loadMore()">
+            加载更多
+        </button>
     </ion-content>
 </ion-view>

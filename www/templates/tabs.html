@@ -1,19 +1,15 @@
-<ion-tabs class="tabs-icon-top tabs-positive">
+<ion-tabs class="tabs-icon-top tabs-positive" ng-controller="TabCtrl">
 
-  <ion-tab title="问答" icon-on="ion-chatboxes" icon-off="ion-chatboxes" href="#/tab/QA">
+  <ion-tab title="问答" icon-on="ion-chatboxes" icon-off="ion-chatboxes" href="#/tab/QA" on-select="onTabSelected('问答')" on-deselect="onTabDeselected('问答')">
     <ion-nav-view name="tab-QA"></ion-nav-view>
   </ion-tab>
 
-  <ion-tab title="文章" icon-on="ion-document-text" icon-off="ion-document-text" href="#/tab/article">
+  <ion-tab title="文章" icon-on="ion-document-text" icon-off="ion-document-text" href="#/tab/article" on-select="onTabSelected('文章')" on-deselect="onTabDeselected('文章')">
     <ion-nav-view name="tab-article"></ion-nav-view>
   </ion-tab>
 
-  <ion-tab title="收藏" icon-on="ion-ios-star" icon-off="ion-ios-star-outline" href="#/tab/favorite">
-    <ion-nav-view name="tab-favorite"></ion-nav-view>
-  </ion-tab>
-
-  <ion-tab title="设置" icon-on="ion-ios-gear" icon-off="ion-ios-gear-outline" href="#/tab/settings">
-    <ion-nav-view name="tab-settings"></ion-nav-view>
+  <ion-tab title="关于" icon-on="ion-information-circled" icon-off="ion-information-circled" href="#/tab/about" on-select="onTabSelected('关于')" on-deselect="onTabDeselected('关于')">
+    <ion-nav-view name="tab-about"></ion-nav-view>
   </ion-tab>
 
 </ion-tabs>

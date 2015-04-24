@@ -1,7 +1,23 @@
-<ion-view view-title="{{questionDetail.title}}">
-  <ion-content class="padding">
-    <p>
-      {{questionDetail.parsedText}}
-    </p>
-  </ion-content>
+<ion-view view-title="问答">
+    <ion-content class="padding">
+        <div class="QA-detail-title">
+            <h4 ng-bind-html="questionDetail.title"></h4>
+            <img width="24" ng-src="{{questionDetail.user.avatarUrl | protocol}}" alt="头像">
+            <strong>{{questionDetail.user.name}}</strong>
+            <strong>{{questionDetail.createdDate}} 提问</strong>
+        </div>
+        <qa-markdown></qa-markdown>
+        
+        <h4>{{questionDetail.answers}}个回答</h4>
+        <hr>
+        <div class="list card mb5 mt5" ng-repeat="answer in answers">
+            <div class="item item-avatar">
+                <img width="24" ng-src="{{answer.user.avatarUrl | protocol}}" alt="头像">
+                <strong>{{answer.user.name}} {{answer.modifiedDate}} 回答</strong>
+            </div>
+            <div class="item item-body">
+                <qa-markdown></qa-markdown>
+            </div>
+        </div>
+    </ion-content>
 </ion-view>
