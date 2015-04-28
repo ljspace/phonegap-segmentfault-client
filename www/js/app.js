@@ -33,11 +33,19 @@ function run($rootScope, $ionicPlatform, $cordovaNetwork, $cordovaDialogs, Analy
             StatusBar.styleLightContent();
         }
 
-        var network = $cordovaNetwork.getNetwork();
+        $rootScope.network = $cordovaNetwork.getNetwork();
 
-        if (network === 'none') {
+        if ($rootScope.network === 'none') {
             $cordovaDialogs.alert('网络异常，请检查网络连接！', '提示', '确认');
         }
+
+        $rootScope.$on('$cordovaNetwork:online', function(event, networkState) {
+            $rootScope.network = networkState;
+        });
+
+        $rootScope.$on('$cordovaNetwork:offline', function(event, networkState) {
+            $rootScope.network = networkState;
+        });
 
         AnalyticsService.init();
     });
@@ -119,6 +127,6 @@ function config($stateProvider, $urlRouterProvider, $ionicConfigProvider, $httpP
                 }
             }
         });
-    
+
     $urlRouterProvider.otherwise('/tab/QA');
 }

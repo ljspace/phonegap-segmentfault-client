@@ -3,6 +3,7 @@ angular.module('segmentfault')
         '$rootScope',
         '$scope',
         'AnalyticsService',
+        '$cordovaDialogs',
         tabCtrl
     ])
     .controller('QuestionCtrl', [
@@ -37,7 +38,7 @@ angular.module('segmentfault')
         articleDetailCtrl
     ]);
 
-function tabCtrl($rootScope, $scope, AnalyticsService) {
+function tabCtrl($rootScope, $scope, AnalyticsService, $cordovaDialogs) {
 
     $scope.onTabSelected = function(page) {
         AnalyticsService.viewStart(page);
@@ -49,8 +50,14 @@ function tabCtrl($rootScope, $scope, AnalyticsService) {
 
     $scope.doRefresh = function() {
 
-        $rootScope.$broadcast('refreshData');
-        AnalyticsService.trackEvent('下拉刷新');
+        if($rootScope.network === 'none') {
+            $rootScope.$broadcast('scroll.refreshComplete');
+            $cordovaDialogs.alert('网络异常，请检查网络连接！', '提示', '确认');
+
+        } else {
+            $rootScope.$broadcast('refreshData');
+            AnalyticsService.trackEvent('下拉刷新');
+        }
     };
 }
 
@@ -75,6 +82,11 @@ function questionCtrl($rootScope, $scope, $ionicLoading, QuestionFactory) {
 
     $rootScope.$on('refreshData', function() {
         getData();
+    });
+
+    $rootScope.$on('$cordovaNetwork:offline', function(event, networkState){
+      
+        $ionicLoading.hide();
     });
 
     $scope.loadMore = function() {
